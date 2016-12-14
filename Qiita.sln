@@ -17,8 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qiita.Windows", "Qiita\Qiit
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Qiita\Qiita\Qiita.projitems*{1aaf24a1-4297-4c8e-9747-a76c9888f5dd}*SharedItemsImports = 4
 		Qiita\Qiita\Qiita.projitems*{52dc34fb-1202-49e2-b2a2-b8c1dd716647}*SharedItemsImports = 4
 		Qiita\Qiita\Qiita.projitems*{68a46fb1-7223-4f0e-9612-0879ff778f39}*SharedItemsImports = 4
+		Qiita\Qiita\Qiita.projitems*{815141e8-e1a6-4e3d-b482-e335beba1287}*SharedItemsImports = 4
+		Qiita\Qiita\Qiita.projitems*{f1b8ce82-ed74-440c-91d0-26d718d9654e}*SharedItemsImports = 4
 		Qiita\Qiita\Qiita.projitems*{f6e41dfd-e69f-4d3e-a8e3-7f61e27a3456}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
