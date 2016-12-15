@@ -1,11 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Qiita"
-             x:Class="Qiita.MainPage">
+<MasterDetailPage
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:local="clr-namespace:Qiita"
+  x:Class="Qiita.MainPage">
 
-	<Label Text="Welcome to Xamarin Forms!" 
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+  <MasterDetailPage.Master>
+    <ContentPage Title="title">
+      <Label Text="Master"/>
+    </ContentPage>
+  </MasterDetailPage.Master>
+  
+  <MasterDetailPage.Detail>
+    <ContentPage Title="detail">
+      <Label Text="Detail"/>
+    </ContentPage>
+  </MasterDetailPage.Detail>
 
-</ContentPage>
+</MasterDetailPage>
