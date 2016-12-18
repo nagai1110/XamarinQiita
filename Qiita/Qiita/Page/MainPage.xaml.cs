@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Qiita
+namespace Qiita.Page
 {
 	public partial class MainPage : MasterDetailPage
 	{

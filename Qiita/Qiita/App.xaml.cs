@@ -13,7 +13,7 @@ namespace Qiita
 		{
 			InitializeComponent();
 
-			MainPage = new Qiita.MainPage();
+			MainPage = new Qiita.Page.MainPage();
 		}
 
 		protected override void OnStart ()
