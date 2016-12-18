@@ -12,9 +12,7 @@
   </MasterDetailPage.Master>
   
   <MasterDetailPage.Detail>
-    <ContentPage Title="detail">
-      <Label Text="Detail"/>
-    </ContentPage>
+    <local:ItemListPage />
   </MasterDetailPage.Detail>
 
 </MasterDetailPage>
