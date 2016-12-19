@@ -5,12 +5,17 @@
   xmlns:local="clr-namespace:Qiita.Page"
   x:Class="Qiita.Page.ItemListPage">
   
-  <ListView x:Name="ItemList">
+  <ListView
+    x:Name="ItemListView">
+    
     <ListView.ItemTemplate>
       <DataTemplate>
-        <ViewCell>
-          <Button Text="{Binding Title}" />
-        </ViewCell>
+        <ImageCell
+          Text ="{Binding User.ID}"
+          Detail ="{Binding Title}"
+          ImageSource ="{Binding User.ProfileImageUrl}">
+      
+        </ImageCell>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>

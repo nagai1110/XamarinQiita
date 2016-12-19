@@ -18,7 +18,7 @@ namespace Qiita.Page
 		{
 			InitializeComponent ();
 
-            ItemList.ItemsSource = Items;
+            ItemListView.ItemsSource = Items;
         }
 
         protected override void OnAppearing()
