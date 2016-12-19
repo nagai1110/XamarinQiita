@@ -9,6 +9,7 @@
     <Import_RootNamespace>Qiita</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)API\IQiitaOAuth.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\QiitaAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\QiitaGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\QiitaItem.cs" />
