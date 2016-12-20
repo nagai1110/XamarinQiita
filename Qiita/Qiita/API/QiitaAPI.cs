@@ -34,11 +34,41 @@ namespace Qiita.API
         //    HttpResponseMessage reponse = await job.GetResponse();
         //}
 
+        public void GetAccessToken(String code, Action<QiitaAcessToken> completed, Action error)
+        {
+            var url = string.Format("https://qiita.com/api/v2/access_tokens");
+            var body = new Dictionary<string, string> {
+                { "client_id", _clientId },
+                { "client_secret", _clientSecret },
+                { "code", code },
+            };
+
+            var json = JsonConvert.SerializeObject(body);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var requester = new HttpRequester();
+            HttpRequestJob<HttpResponseMessage> job = requester.POST(url, content);
+
+            Task<HttpResponseMessage> task = job.GetResponse();
+            task.ContinueWith(t => {
+                switch (t.Status)
+                {
+                    case TaskStatus.RanToCompletion:
+                        string str = t.Result.Content.ReadAsStringAsync().Result;
+                        var accessToken = JsonConvert.DeserializeObject<QiitaAcessToken>(str);
+                        completed(accessToken);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+
         public void GetAllItems(Action<List<QiitaItem>> completed, Action error)
         {
-            string url = string.Format("https://qiita.com/api/v2/items");
+            var url = string.Format("https://qiita.com/api/v2/items");
 
-            HttpRequester requester = new HttpRequester();
+            var requester = new HttpRequester();
             HttpRequestJob<HttpResponseMessage> job = requester.GET(url);
 
             Task<HttpResponseMessage> task = job.GetResponse();
@@ -46,8 +76,8 @@ namespace Qiita.API
                 switch(t.Status)
                 {
                     case TaskStatus.RanToCompletion:
-                        string json = t.Result.Content.ReadAsStringAsync().Result;
-                        List<QiitaItem> items = JsonConvert.DeserializeObject<List<QiitaItem>>(json);
+                        string str = t.Result.Content.ReadAsStringAsync().Result;
+                        var items = JsonConvert.DeserializeObject<List<QiitaItem>>(str);
                         completed(items);
                         break;
                     default:

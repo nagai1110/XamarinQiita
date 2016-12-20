@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)API\IQiitaOAuth.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\QiitaAcessToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\QiitaAPI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\QiitaGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\QiitaItem.cs" />

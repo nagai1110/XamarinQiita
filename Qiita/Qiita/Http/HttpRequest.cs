@@ -38,10 +38,10 @@ namespace Qiita.Http
 
         public HttpRequestJob<HttpResponseMessage> GET(string url)
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
+            var cts = new CancellationTokenSource();
             Task<HttpResponseMessage> task = _client.GetAsync(url, cts.Token);
 
-            HttpRequestJob<HttpResponseMessage> job = new HttpRequestJob<HttpResponseMessage>(task, () =>
+            var job = new HttpRequestJob<HttpResponseMessage>(task, () =>
             {
                 if (cts.IsCancellationRequested) return;
 
@@ -51,13 +51,12 @@ namespace Qiita.Http
             return job;
         }
 
-        public HttpRequestJob<HttpResponseMessage> POST(string url)
+        public HttpRequestJob<HttpResponseMessage> POST(string url, HttpContent httpContent)
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
-            // TODO HTTP Content
-            Task<HttpResponseMessage> task = _client.PostAsync(url, null, cts.Token);
+            var cts = new CancellationTokenSource();
+            Task<HttpResponseMessage> task = _client.PostAsync(url, httpContent, cts.Token);
 
-            HttpRequestJob<HttpResponseMessage> job = new HttpRequestJob<HttpResponseMessage>(task, () =>
+            var job = new HttpRequestJob<HttpResponseMessage>(task, () =>
             {
                 if (cts.IsCancellationRequested) return;
 
