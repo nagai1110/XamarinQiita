@@ -4,6 +4,7 @@ using System.Text;
 
 using Xamarin.Auth;
 using Xamarin.Forms;
+using Newtonsoft.Json;
 
 namespace Qiita.API.OAuth
 {
@@ -55,8 +56,8 @@ namespace Qiita.API.OAuth
                                 OnSucceeded(new Account(
                                     user.ID,
                                     new Dictionary<string, string> {
-                                        { "token", accessToken.AccessToken }
-                                        // User情報返す必要があれば追加する
+                                        { "token", accessToken.AccessToken },
+                                        { "user", JsonConvert.SerializeObject(user) }
                                     }
                                 ));
                             },

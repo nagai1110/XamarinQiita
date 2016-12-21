@@ -22,7 +22,7 @@ namespace Qiita.Page
 
         private void NavigateTo(MenuItem menu)
         {
-            if (menu.Name.Equals("ログイン"))
+            if (menu.Text.Equals("ログイン"))
             {
                 var auth = new QiitaAuthenticator(
                 "cdd6590e0e9bc747e989e91720f98e00bbfa7b7d",
@@ -37,9 +37,10 @@ namespace Qiita.Page
 
                 auth.StartAuth();
             }
-            else if (menu.Name.Equals("ログアウト"))
+            else if (menu.Text.Equals("ログアウト"))
             {
-                PropertiesAccesser.Remove(PropertiesKey.LoginUserToken); 
+                PropertiesAccesser.Remove(PropertiesKey.LoginUserToken);
+                masterPage.UpdateMenu();
             }
 
             IsPresented = false;
@@ -49,8 +50,10 @@ namespace Qiita.Page
         {
             if (e.IsAuthenticated)
             {
-                Application.Current.Properties[PropertiesKey.LoginUserName] = e.Account.Username;
+                Application.Current.Properties[PropertiesKey.LoginUser] = e.Account.Properties["user"];
                 Application.Current.Properties[PropertiesKey.LoginUserToken] = e.Account.Properties["token"];
+
+                masterPage.UpdateMenu();
             }
         }
     }

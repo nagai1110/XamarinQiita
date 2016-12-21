@@ -1,4 +1,5 @@
-﻿using Qiita.Setting;
+﻿using Qiita.API;
+using Qiita.Setting;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace Qiita.Page
@@ -27,32 +29,30 @@ namespace Qiita.Page
         {
             base.OnAppearing();
 
+            UpdateMenu();
+        }
+
+        public void UpdateMenu()
+        {
             _items.Clear();
 
             // TODO:ログインしているかどうかの判定はどこかで共通化する
             if (PropertiesAccesser.Get(PropertiesKey.LoginUserToken) == null)
             {
-                _items.Add(new MenuItem("ログイン", ""));
+                _items.Add(new MenuItem() { Text = "ログイン", Icon = "" });
             }
             else
             {
-                _items.Add(new MenuItem("フォロー中のタグ", ""));
-                _items.Add(new MenuItem("ログアウト", ""));
+                var userObj = PropertiesAccesser.Get(PropertiesKey.LoginUser);
+                if (userObj != null)
+                {
+                    var user = JsonConvert.DeserializeObject<QiitaUser>(userObj as string);
+                    _items.Add(new MenuItem() { Text = user.ID, Icon = user.ProfileImageUrl });
+                }
+
+                _items.Add(new MenuItem() { Text = "フォロー中のタグ", Icon = "" });
+                _items.Add(new MenuItem() { Text = "ログアウト", Icon = "" });
             }
-            
-        }
-    }
-
-    public class MenuItem
-    {
-        public string Name { get; set; }
-        // TODO:仮でstring
-        public string Icon { get; set; }
-
-        public MenuItem(string name, string icon)
-        {
-            Name = name;
-            Icon = icon;
         }
     }
 }

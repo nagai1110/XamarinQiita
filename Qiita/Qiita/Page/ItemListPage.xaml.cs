@@ -28,10 +28,10 @@ namespace Qiita.Page
         {
             base.OnAppearing();
 
-            updateItems();
+            UpdateItems();
         }
 
-        private void updateItems()
+        private void UpdateItems()
         {
             _items.Clear();
 

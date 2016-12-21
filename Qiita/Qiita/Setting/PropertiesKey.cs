@@ -7,7 +7,7 @@ namespace Qiita.Setting
 {
     public static class PropertiesKey
     {
-        public const string LoginUserName   = @"login_user_name";
+        public const string LoginUser       = @"login_user";
         public const string LoginUserToken  = @"login_user_token";
     }
 

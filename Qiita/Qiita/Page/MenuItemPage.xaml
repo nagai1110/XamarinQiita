@@ -12,8 +12,8 @@
     <ListView.ItemTemplate>
       <DataTemplate>
         <ImageCell
-          Text ="{Binding Name}"
-          ImageSource ="">
+          Text ="{Binding Text}"
+          ImageSource ="{Binding Icon}">
 
         </ImageCell>
       </DataTemplate>
