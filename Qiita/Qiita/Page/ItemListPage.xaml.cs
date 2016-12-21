@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Auth;
 using Qiita.API;
 using Qiita.API.OAuth;
+using Qiita.Setting;
 
 namespace Qiita.Page
 {
@@ -27,40 +28,29 @@ namespace Qiita.Page
         {
             base.OnAppearing();
 
-            //QiitaAPI api = new QiitaAPI();
-            //api.GetAllItems(
-            //    items =>
-            //    {
-            //        foreach (QiitaItem item in items)
-            //        {
-            //            Items.Add(item);
-            //        }
-            //    },
-            //    () =>
-            //    {
-            //        int bbb = 0;
-            //    });
-
-            var auth = new QiitaAuthenticator (
-                "cdd6590e0e9bc747e989e91720f98e00bbfa7b7d",
-                "a5ede5f7bd83c32360848c9466f9d1937eff20a7",
-                "read_qiita",
-                new Uri("https://qiita.com/api/v2/oauth/authorize"),
-                new Uri("http://qiita.com/nagasakulllo"),
-                new Uri("https://qiita.com/api/v2/access_tokens"));
-
-            auth.AllowCancel = true;
-            auth.Completed += OnAuthenticationCompleted;
-
-            auth.StartAuth();
+            updateItems();
         }
 
-        void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        private void updateItems()
         {
-            if (e.IsAuthenticated)
-            {
+            _items.Clear();
 
-            }
+            var api = new QiitaAPI();
+            var token = PropertiesAccesser.Get(PropertiesKey.LoginUserToken);
+            if (token != null) api.AccessToken = token as string;
+
+            api.GetAllItems(
+                items =>
+                {
+                    foreach (QiitaItem item in items)
+                    {
+                        _items.Add(item);
+                    }
+                },
+                () =>
+                {
+
+                });
         }
     }
 }
