@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,6 +35,11 @@ namespace Qiita.Http
         public HttpRequester()
         {
             _client = new HttpClient();
+        }
+
+        public void SetBearerToken(string token)
+        {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
         public HttpRequestJob<HttpResponseMessage> GET(string url)

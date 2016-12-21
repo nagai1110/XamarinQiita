@@ -4,7 +4,7 @@ using System.Text;
 
 using Xamarin.Auth;
 
-namespace Qiita.API
+namespace Qiita.API.OAuth
 {
     interface IQiitaOAuth
     {

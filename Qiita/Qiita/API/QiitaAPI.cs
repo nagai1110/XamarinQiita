@@ -13,14 +13,21 @@ namespace Qiita.API
         private string _clientId;
         private string _clientSecret;
 
+        public string AccessToken { get; set; }
+
         public QiitaAPI() : this(null, null)
         { 
         }
 
-        public QiitaAPI(string clientId, string clientSecret)
+        public QiitaAPI(string clientId, string clientSecret) : this(clientId, clientSecret, null)
+        {
+        }
+
+        public QiitaAPI(string clientId, string clientSecret, string accessToken)
         {
             _clientId = clientId;
             _clientSecret = clientSecret;
+            AccessToken = accessToken;
         }
 
         //public async void OAuth()
@@ -64,11 +71,35 @@ namespace Qiita.API
             });
         }
 
+        public void AuthenticatedUser(Action<QiitaUser> completed, Action error)
+        {
+            var url = string.Format("https://qiita.com/api/v2/authenticated_user");
+
+            var requester = new HttpRequester();
+            if (!string.IsNullOrEmpty(AccessToken)) requester.SetBearerToken(AccessToken);
+            HttpRequestJob<HttpResponseMessage> job = requester.GET(url);
+
+            Task<HttpResponseMessage> task = job.GetResponse();
+            task.ContinueWith(t => {
+                switch (t.Status)
+                {
+                    case TaskStatus.RanToCompletion:
+                        string str = t.Result.Content.ReadAsStringAsync().Result;
+                        var user = JsonConvert.DeserializeObject<QiitaUser>(str);
+                        completed(user);
+                        break;
+                    default:
+                        break;
+                }
+            });
+        }
+
         public void GetAllItems(Action<List<QiitaItem>> completed, Action error)
         {
             var url = string.Format("https://qiita.com/api/v2/items");
 
             var requester = new HttpRequester();
+            if (!string.IsNullOrEmpty(AccessToken)) requester.SetBearerToken(AccessToken); 
             HttpRequestJob<HttpResponseMessage> job = requester.GET(url);
 
             Task<HttpResponseMessage> task = job.GetResponse();

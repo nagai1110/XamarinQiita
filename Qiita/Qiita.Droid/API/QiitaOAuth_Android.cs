@@ -3,12 +3,12 @@ using Xamarin.Forms;
 using Android.Content;
 using Android.OS;
 using Xamarin.Auth;
-using Qiita.API.Android;
 using Android.App;
+using Qiita.API.OAuth.Android;
 
 [assembly: Dependency(typeof(QiitaOAuth_Android))]
 
-namespace Qiita.API.Android
+namespace Qiita.API.OAuth.Android
 {
     public class QiitaOAuth_Android : IQiitaOAuth
     {

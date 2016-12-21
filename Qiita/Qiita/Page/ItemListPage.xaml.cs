@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Auth;
 using Qiita.API;
+using Qiita.API.OAuth;
 
 namespace Qiita.Page
 {
 	public partial class ItemListPage : ContentPage
 	{
-        ObservableCollection<QiitaItem> Items = new ObservableCollection<QiitaItem>();
+        private ObservableCollection<QiitaItem> _items = new ObservableCollection<QiitaItem>();
 
         public ItemListPage ()
 		{
 			InitializeComponent ();
 
-            ItemListView.ItemsSource = Items;
+            ItemListView.ItemsSource = _items;
         }
 
         protected override void OnAppearing()
@@ -40,7 +41,7 @@ namespace Qiita.Page
             //        int bbb = 0;
             //    });
 
-            var auth = new MyAuthenticator (
+            var auth = new QiitaAuthenticator (
                 "cdd6590e0e9bc747e989e91720f98e00bbfa7b7d",
                 "a5ede5f7bd83c32360848c9466f9d1937eff20a7",
                 "read_qiita",
@@ -49,10 +50,9 @@ namespace Qiita.Page
                 new Uri("https://qiita.com/api/v2/access_tokens"));
 
             auth.AllowCancel = true;
-          
-            var oauther = DependencyService.Get<IQiitaOAuth>();
             auth.Completed += OnAuthenticationCompleted;
-            oauther.StartOAuth(auth);
+
+            auth.StartAuth();
         }
 
         void OnAuthenticationCompleted(object sender, AuthenticatorCompletedEventArgs e)
@@ -61,42 +61,6 @@ namespace Qiita.Page
             {
 
             }
-        }
-    }
-
-    // TODO:仮
-    public class MyAuthenticator : OAuth2Authenticator
-    {
-        public MyAuthenticator(string clientId, string scope, Uri authorizeUrl, Uri redirectUrl, GetUsernameAsyncFunc getUsernameAsync = null)
-            : base(clientId, scope, authorizeUrl, redirectUrl, getUsernameAsync)
-        {
-
-        }
-        public MyAuthenticator(string clientId, string clientSecret, string scope, Uri authorizeUrl, Uri redirectUrl, Uri accessTokenUrl, GetUsernameAsyncFunc getUsernameAsync = null)
-            : base(clientId, clientSecret, scope, authorizeUrl, redirectUrl, accessTokenUrl, getUsernameAsync)
-        {
-
-        }
-
-        protected override void OnRedirectPageLoaded(Uri url, IDictionary<string, string> query, IDictionary<string, string> fragment)
-        {
-            if (query.ContainsKey("code"))
-            {
-                var code = query["code"];
-
-                var api = new QiitaAPI("cdd6590e0e9bc747e989e91720f98e00bbfa7b7d", "a5ede5f7bd83c32360848c9466f9d1937eff20a7");
-                api.GetAccessToken(code,
-                    json =>
-                {
-                    // TODO:アクセストークン保持
-                    base.OnSucceeded(new Account());
-                },
-                () =>
-                {
-                    int bbb = 0;
-                });
-            }
-            // base.OnRedirectPageLoaded(url, query, fragment);
         }
     }
 }
