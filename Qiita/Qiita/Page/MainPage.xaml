@@ -6,13 +6,15 @@
   x:Class="Qiita.Page.MainPage">
 
   <MasterDetailPage.Master>
-    <ContentPage Title="title">
-      <Label Text="Master"/>
-    </ContentPage>
+    <local:MenuItemPage x:Name="masterPage" />
   </MasterDetailPage.Master>
   
   <MasterDetailPage.Detail>
-    <local:ItemListPage />
+    <NavigationPage>
+      <x:Arguments>
+        <local:ItemListPage />
+      </x:Arguments>
+    </NavigationPage>
   </MasterDetailPage.Detail>
 
 </MasterDetailPage>

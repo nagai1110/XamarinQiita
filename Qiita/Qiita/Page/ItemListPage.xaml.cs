@@ -6,39 +6,51 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Auth;
 using Qiita.API;
+using Qiita.API.OAuth;
+using Qiita.Setting;
 
 namespace Qiita.Page
 {
 	public partial class ItemListPage : ContentPage
 	{
-        ObservableCollection<QiitaItem> Items = new ObservableCollection<QiitaItem>();
+        private ObservableCollection<QiitaItem> _items = new ObservableCollection<QiitaItem>();
 
         public ItemListPage ()
 		{
 			InitializeComponent ();
 
-            ItemListView.ItemsSource = Items;
+            ItemListView.ItemsSource = _items;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            QiitaAPI api = new QiitaAPI();
+            updateItems();
+        }
+
+        private void updateItems()
+        {
+            _items.Clear();
+
+            var api = new QiitaAPI();
+            var token = PropertiesAccesser.Get(PropertiesKey.LoginUserToken);
+            if (token != null) api.AccessToken = token as string;
+
             api.GetAllItems(
                 items =>
                 {
                     foreach (QiitaItem item in items)
                     {
-                        Items.Add(item);
+                        _items.Add(item);
                     }
                 },
                 () =>
                 {
-                    int bbb = 0;
+
                 });
         }
-
     }
 }
