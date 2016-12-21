@@ -43,7 +43,7 @@ namespace Qiita.API.OAuth
             if (query.ContainsKey("code"))
             {
                 var code = query["code"];
-                var api = new QiitaAPI(base.ClientId, base.ClientSecret);
+                var api = new QiitaAPI(ClientId, ClientSecret);
 
                 api.GetAccessToken(code,
                     accessToken =>
@@ -52,7 +52,7 @@ namespace Qiita.API.OAuth
                         api.AuthenticatedUser(
                             user =>
                             {
-                                base.OnSucceeded(new Account(
+                                OnSucceeded(new Account(
                                     user.ID,
                                     new Dictionary<string, string> {
                                         { "token", accessToken.AccessToken }
@@ -66,12 +66,12 @@ namespace Qiita.API.OAuth
                     },
                     () =>
                     {
-                        base.OnError("Cannot get access token");
+                        OnError("Cannot get access token");
                     });
                 return;
             }
 
-            base.OnError("Cannot get code");
+            OnError("Cannot get code");
         }
     }
 }
