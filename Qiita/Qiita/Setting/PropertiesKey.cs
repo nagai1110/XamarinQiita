@@ -13,11 +13,16 @@ namespace Qiita.Setting
 
     public static class PropertiesAccesser
     {
+        private static object lockObject = new object();
+
         public static object Get(string key)
         {
-            if (Application.Current.Properties.ContainsKey(key))
+            lock (lockObject)
             {
-                return Application.Current.Properties[key];
+                if (Application.Current.Properties.ContainsKey(key))
+                {
+                    return Application.Current.Properties[key];
+                }
             }
 
             return null;
@@ -25,14 +30,20 @@ namespace Qiita.Setting
 
         public static void Set(string key, object value)
         {
-            Application.Current.Properties[key] = value;
+            lock (lockObject)
+            {
+                Application.Current.Properties[key] = value;
+            }
         }
 
         public static void Remove(string key)
         {
-            if (Application.Current.Properties.ContainsKey(key))
+            lock (lockObject)
             {
-                Application.Current.Properties.Remove(key);
+                if (Application.Current.Properties.ContainsKey(key))
+                {
+                    Application.Current.Properties.Remove(key);
+                }
             }
         }
     }

@@ -33,6 +33,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Setting\PropertiesKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Share\Share.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Util\LoginUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">

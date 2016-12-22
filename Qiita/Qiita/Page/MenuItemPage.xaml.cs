@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 using Xamarin.Forms;
+using Qiita.Util;
 
 namespace Qiita.Page
 {
@@ -36,20 +37,14 @@ namespace Qiita.Page
         {
             _items.Clear();
 
-            // TODO:ログインしているかどうかの判定はどこかで共通化する
-            if (PropertiesAccesser.Get(PropertiesKey.LoginUserToken) == null)
+            if (!LoginUtil.IsLogined())
             {
                 _items.Add(new MenuItem() { Text = "ログイン", Icon = "" });
             }
             else
             {
-                var userObj = PropertiesAccesser.Get(PropertiesKey.LoginUser);
-                if (userObj != null)
-                {
-                    var user = JsonConvert.DeserializeObject<QiitaUser>(userObj as string);
-                    _items.Add(new MenuItem() { Text = user.ID, Icon = user.ProfileImageUrl });
-                }
-
+                QiitaUser user = LoginUtil.LoginUser();
+                _items.Add(new MenuItem() { Text = user.ID, Icon = user.ProfileImageUrl });
                 _items.Add(new MenuItem() { Text = "フォロー中のタグ", Icon = "" });
                 _items.Add(new MenuItem() { Text = "ログアウト", Icon = "" });
             }
