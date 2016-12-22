@@ -10,6 +10,7 @@ using Xamarin.Auth;
 using Qiita.API;
 using Qiita.API.OAuth;
 using Qiita.Setting;
+using Qiita.Share;
 
 namespace Qiita.Page
 {
@@ -22,6 +23,7 @@ namespace Qiita.Page
 			InitializeComponent ();
 
             ItemListView.ItemsSource = _items;
+            ItemListView.ItemSelected += (sender, e) => OnItemSelected(e.SelectedItem as QiitaItem);
         }
 
         protected override void OnAppearing()
@@ -51,6 +53,11 @@ namespace Qiita.Page
                 {
 
                 });
+        }
+
+        private void OnItemSelected(QiitaItem item)
+        {
+            Share.Share.ShareUrlAsync(item.Url, "", "");
         }
     }
 }
