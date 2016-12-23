@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -37,17 +38,35 @@ namespace Qiita.Page
         {
             _items.Clear();
 
-            if (!LoginUtil.IsLogined())
+            bool isLogined = LoginUtil.IsLogined();
+            UpdateUser(isLogined);
+            UpdateItems(isLogined);
+        }
+
+        private void UpdateItems(bool isLogined)
+        {
+            if (isLogined)
             {
-                _items.Add(new MenuItem() { Text = "ログイン", Icon = "" });
+                _items.Add(new MenuItem() { Text = "フォロー中のタグ", Icon = "" });
+                _items.Add(new MenuItem() { Text = "ログアウト", Icon = "login.png" });
             }
             else
             {
-                QiitaUser user = LoginUtil.LoginUser();
-                _items.Add(new MenuItem() { Text = user.ID, Icon = user.ProfileImageUrl });
-                _items.Add(new MenuItem() { Text = "フォロー中のタグ", Icon = "" });
-                _items.Add(new MenuItem() { Text = "ログアウト", Icon = "" });
+                _items.Add(new MenuItem() { Text = "ログイン", Icon = "login.png" });
             }
+        }
+
+        private void UpdateUser(bool isLogined)
+        {
+            UserName.IsVisible = isLogined;
+            UserIcon.IsVisible = isLogined;
+
+            if (isLogined)
+            {
+                QiitaUser user = LoginUtil.LoginUser();
+                UserName.Text = user.ID;
+                UserIcon.Source = user.ProfileImageUrl;
+            }            
         }
     }
 }
