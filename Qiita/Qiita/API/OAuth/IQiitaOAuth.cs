@@ -6,7 +6,7 @@ using Xamarin.Auth;
 
 namespace Qiita.API.OAuth
 {
-    interface IQiitaOAuth
+    public interface IQiitaOAuth
     {
         void StartOAuth(OAuth2Authenticator authenticator);
     }

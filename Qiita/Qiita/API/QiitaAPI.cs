@@ -30,17 +30,6 @@ namespace Qiita.API
             AccessToken = accessToken;
         }
 
-        //public async void OAuth()
-        //{
-        //    // とりあえずread固定
-        //    string url = string.Format("https://qiita.com/api/v2/oauth/authorize?client_id={0}&scope=read_qiita", _clientId);
-
-        //    HttpRequester requester = new HttpRequester();
-        //    HttpRequestJob<HttpResponseMessage> job = requester.GET(url);
-
-        //    HttpResponseMessage reponse = await job.GetResponse();
-        //}
-
         public void GetAccessToken(String code, Action<QiitaAcessToken> completed, Action error)
         {
             var url = string.Format("https://qiita.com/api/v2/access_tokens");
