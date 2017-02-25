@@ -57,7 +57,8 @@ namespace Qiita.Page
 
         private void OnItemSelected(QiitaItem item)
         {
-            Share.Share.ShareUrlAsync(item.Url, "", "");
+            Navigation.PushAsync(new WebViewPage(item.Url));
+            // Share.Share.ShareUrlAsync(item.Url, "", "");
         }
     }
 }
