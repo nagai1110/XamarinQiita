@@ -49,6 +49,9 @@
     <Compile Include="Page\ItemListPage.xaml.cs" />
     <Compile Include="Page\MainPage.xaml.cs" />
     <Compile Include="Page\MenuItemPage.xaml.cs" />
+    <Compile Include="Page\WebViewPage.xaml.cs">
+      <DependentUpon>WebViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting\PropertiesKey.cs" />
     <Compile Include="Share\Share.cs" />
@@ -114,7 +117,12 @@
     <None Include="GettingStarted.Xamarin" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Page\WebViewPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page\ItemListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
