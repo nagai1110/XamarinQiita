@@ -55,10 +55,18 @@ namespace Qiita.Page
                 });
         }
 
-        private void OnItemSelected(QiitaItem item)
+        private async void OnItemSelected(QiitaItem item)
         {
-            Navigation.PushAsync(new WebViewPage(item.Url));
-            // Share.Share.ShareUrlAsync(item.Url, "", "");
+            //DisplayActionSheetの表示
+            var result = await DisplayActionSheet("選択", "キャンセル", null, "開く", "共有");
+            if (result == "開く")
+            {
+                Navigation.PushAsync(new WebViewPage(item.Url));
+            }
+            else if (result == "共有")
+            {
+                Share.Share.ShareUrlAsync(item.Url, "", "");
+            } 
         }
     }
 }
