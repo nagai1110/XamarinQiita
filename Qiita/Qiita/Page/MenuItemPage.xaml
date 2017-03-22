@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  xmlns="http://xamarin.com/schemas/2014/forms"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:local="clr-namespace:Qiita.Page"
+  x:Class="Qiita.Page.MenuItemPage"
+  Padding="0,40,0,0"
+  Title="master" >
+
+  <StackLayout
+    Padding="10,40,0,0" >
+    
+    <Image
+      x:Name="UserIcon"
+      WidthRequest="100"
+      HeightRequest="100">
+    </Image>
+
+    <Label
+      x:Name="UserName">  
+    </Label>
+  
+    <ListView
+      x:Name="ItemListView">
+
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ImageCell
+            Text="{Binding Text}"
+            ImageSource="{Binding Icon}">
+          </ImageCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
+</ContentPage>
