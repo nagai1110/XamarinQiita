@@ -14,7 +14,7 @@ QiitaのAPI周り
 #### QiitaAPI
 ```
 GetAccessToken : アクセストークンの取得
-AuthenticatedUser : アクセストークンのチェック？(忘れました)
+AuthenticatedUser : 認証済みユーザーかどうかのチェック
 GetAllItems : 新着記事の取得
 ```
 
