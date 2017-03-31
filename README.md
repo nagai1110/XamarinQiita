@@ -5,7 +5,8 @@ XamarinFormsで作ったQiitaアプリ
 Xamarinでモバイルアプリをどのように作れるかを調査するために作ったサンプルプロジェクト   
 C#良く分かっていないので糞コードです   
 
-##　NameSpaceの説明
+## NameSpaceの説明
+
 ### Qiita.API
 QiitaのAPI周り   
 [Qiita API v2](https://qiita.com/api/v2/docs)
