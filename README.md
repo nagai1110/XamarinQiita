@@ -5,81 +5,78 @@ XamarinFormsで作ったQiitaアプリ
 Xamarinでモバイルアプリをどのように作れるかを調査するために作ったサンプルプロジェクト   
 C#良く分かっていないので糞コードです   
 
-### namespaceの説明
-各namespaceの説明
-
-#### Qiita.API
+### Qiita.API
 QiitaのAPI周り   
 [Qiita API v2](https://qiita.com/api/v2/docs)
 
-##### QiitaAPI
+#### QiitaAPI
 ```
 GetAccessToken : アクセストークンの取得
 AuthenticatedUser : アクセストークンのチェック？(忘れました)
 GetAllItems : 新着記事の取得
 ```
 
-##### QiitaAccessToken
+#### QiitaAccessToken
 アクセストークンの情報を保持するクラス
 
-##### QiitaGroup
+#### QiitaGroup
 グループ情報を保持するクラス
 
-##### QiitaItem
+#### QiitaItem
 記事情報を保持するクラス
 
-##### QiitaUser
+#### QiitaUser
 ユーザー情報を保持するクラス
 
-#### Qiita.API.OAuthパッケージ
-Qiitaの認証(OAuth)周り   
+### Qiita.API.OAuthパッケージ
+Qiitaの認証(OAuth)周り
 
-##### QiitaAuthenticator
+#### QiitaAuthenticator
 OAuth認証を行うクラス   
 内部で、Xamarin.Formsの`DependencyService`を使って、Android/iOS独自コードを呼び出す、という仕組みを使っています
 
-#####　IQiitaOAuth
+#### IQiitaOAuth
 Android/iOS独自部分のI/Fクラス   
 `Qiita.API.OAuth.Android`の`QiitaOAuth_Android`がAndroidの具象クラスになります   
 ※すみません、iOSは未実装です
 
-#### Qiita.Http
+### Qiita.Http
 HTTPリクエスト周り
 
-##### HttpRequest
+#### HttpRequest
 ```
 GET : Getリクエスト
 POST : Postリクエスト
 ```
 
-#### Qiita.Page
+### Qiita.Page
 UI周り
 
-##### MainPage
+#### MainPage
 メインページ(MasterDetailPage)
 
-##### MenuItemPage
+#### MenuItemPage
 メインページのMasterPageに表示するページ
 
 - ログイン中ユーザーのアイコン表示
 - ログイン/ログアウト
 
-##### ItemListPage
+#### ItemListPage
 メインページのDetailPageに表示するページ
 
 - 記事一覧の表示
 - 記事をタップするとアクションシートがでてきて、記事の閲覧 or 外部アプリへの共有を選択できる
 
-##### WebViewPage
+#### WebViewPage
 記事内容を表示するページ(ただのWebView)
 
-#### Qiita.Setting
+### Qiita.Setting
 データの永続化周り
 
-##### PropertiesKey
+#### PropertiesKey
 永続化するキーを定義するクラス
 
-##### PropertiesAccesser
+#### PropertiesAccesser
 永続化データにアクセスするクラス
 
 ```
@@ -88,10 +85,10 @@ Set : 更新
 Remove : 削除
 ```
 
-#### Qiita.Share
+### Qiita.Share
 外部アプリへの共有周り
 
-##### Share
+#### Share
 外部アプリへの共有を行うクラス   
 ほぼOSS
 
