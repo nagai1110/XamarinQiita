@@ -5,6 +5,7 @@ XamarinFormsで作ったQiitaアプリ
 Xamarinでモバイルアプリをどのように作れるかを調査するために作ったサンプルプロジェクト   
 C#良く分かっていないので糞コードです   
 
+##　NameSpaceの説明
 ### Qiita.API
 QiitaのAPI周り   
 [Qiita API v2](https://qiita.com/api/v2/docs)
@@ -28,7 +29,7 @@ GetAllItems : 新着記事の取得
 #### QiitaUser
 ユーザー情報を保持するクラス
 
-### Qiita.API.OAuthパッケージ
+### Qiita.API.OAuth
 Qiitaの認証(OAuth)周り
 
 #### QiitaAuthenticator
